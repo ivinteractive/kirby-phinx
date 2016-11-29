@@ -3,8 +3,10 @@
 use Dotenv\Dotenv;
 require 'vendor/autoload.php';
 
-$dotenv = new Dotenv(__DIR__);
-$dotenv->load();
+if(file_exists(__DIR__ . '/.env')):
+    $dotenv = new Dotenv(__DIR__);
+    $dotenv->load();
+endif;
 
 define('DS', DIRECTORY_SEPARATOR);
 
