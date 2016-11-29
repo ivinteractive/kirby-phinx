@@ -1,0 +1,15 @@
+{
+    "name": "ivinteractive/kirby-phinx",
+    "description": "A wrapper for Phinx to be used in Kirby CMS",
+    "require": {
+        "robmorgan/phinx": "^0.6.5",
+        "vlucas/phpdotenv": "^2.4",
+        "fzaninotto/faker": "^1.6"
+    },
+    "authors": [
+        {
+            "name": "Craig Spivack",
+            "email": "craig.spivack@ivinteractive.com"
+        }
+    ]
+}
