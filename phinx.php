@@ -3,6 +3,10 @@
 use Dotenv\Dotenv;
 require 'vendor/autoload.php';
 
+if(!defined('DS'))    define('DS', DIRECTORY_SEPARATOR);
+
+require __DIR__ . DS . 'lib' . DS . 'helpers.php';
+
 if(file_exists(__DIR__ . '/.env')):
     $dotenv = new Dotenv(__DIR__);
     $dotenv->load();
@@ -25,8 +29,8 @@ if(file_exists($path . DS . 'site.php')) {
 return [
     'paths' => 
         [
-            'migrations' => $kirby->roots()->index() . DS . 'migrations',
-            'seeds' => $kirby->roots()->index() . DS . 'seeds',
+            'migrations' => $kirby->roots()->index() . DS . PhinxHelper::env('PHINX_MIGRATIONS', 'migrations'),
+            'seeds' => $kirby->roots()->index() . DS . PhinxHelper::env('PHINX_SEEDS', 'seeds'),
         ],
     'environments' => 
         [
@@ -34,11 +38,11 @@ return [
             'default_database' => 'default',
             'default' => 
                 [
-                    'adapter' => getenv('DB_ADAPTER'),
-                    'host'    => getenv('DB_HOST'),
-                    'name'    => getenv('DB_DATABASE'),
-                    'user'    => getenv('DB_USERNAME'),
-                    'pass'    => getenv('DB_PASSWORD'),
+                    'adapter' => PhinxHelper::env('DB_ADAPTER', 'mysql'),
+                    'host'    => PhinxHelper::env('DB_HOST', 'localhost'),
+                    'name'    => PhinxHelper::env('DB_DATABASE', 'dbname'),
+                    'user'    => PhinxHelper::env('DB_USERNAME', 'user'),
+                    'pass'    => PhinxHelper::env('DB_PASSWORD', 'password'),
                     'port'    => 3306,
                     'charset' => 'utf8',
                 ],
